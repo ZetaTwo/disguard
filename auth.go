@@ -65,7 +65,7 @@ func (o *Session) ObtainToken(code string) (*TokenResponse, error) {
 
 // GetUser ...
 func (o *Session) GetUser(tokenResponse *TokenResponse) (*User, error) {
-	req, err := http.NewRequest("GET", "https://discordapp.com/api/users/@me", nil)
+	req, err := http.NewRequest("GET", "https://discord.com/api/users/@me", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ func (o *Session) GetUser(tokenResponse *TokenResponse) (*User, error) {
 
 // GetGuilds ...
 func (o *Session) GetGuilds(tokenResponse *TokenResponse) ([]Guild, error) {
-	req, err := http.NewRequest("GET", "https://discordapp.com/api/users/@me/guilds", nil)
+	req, err := http.NewRequest("GET", "https://discord.com/api/users/@me/guilds", nil)
 	if err != nil {
 		return nil, err
 	}
