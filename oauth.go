@@ -41,6 +41,6 @@ func (conf *OAuthSection) GetAuthorizationURL() string {
 }
 
 // GetTokenURL returns blah
-func (conf *OAuthSection) GetTokenURL(code string) string {
-	return fmt.Sprintf(tokenURL, conf.ClientID, conf.ClientSecret, oauthScope, code, conf.getRedirectURL())
+func (conf *OAuthSection) GetTokenURL() string {
+	return tokenURL
 }

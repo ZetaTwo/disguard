@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"mime"
 	"net/http"
+	"net/url"
 	"path/filepath"
 	"strings"
 
@@ -34,10 +35,19 @@ func (o *Session) HandleLogout(w http.ResponseWriter, r *http.Request) {
 
 // ObtainToken ...
 func (o *Session) ObtainToken(code string) (*TokenResponse, error) {
-	req, err := http.NewRequest("POST", o.config.OAuth.GetTokenURL(code), nil)
+	data := url.Values{}
+	data.Set("client_id", o.config.OAuth.ClientID)
+	data.Set("client_secret", o.config.OAuth.ClientSecret)
+	data.Set("grant_type", "authorization_code")
+	data.Set("code", code)
+	data.Set("redirect_uri", o.config.OAuth.RedirectURL)
+	data.Set("scope", "identify connections")
+
+	req, err := http.NewRequest("POST", o.config.OAuth.GetTokenURL(), strings.NewReader(data.Encode()))
 	if err != nil {
 		return nil, err
 	}
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 	resp, err := o.httpClient.Do(req)
 	if err != nil {
 		return nil, err
