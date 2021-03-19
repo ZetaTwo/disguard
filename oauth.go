@@ -8,7 +8,7 @@ import (
 var (
 	oauthScope       = url.QueryEscape("identify guilds")
 	authorizationURL = "https://discord.com/oauth2/authorize?response_type=code&client_id=%s&scope=%s&redirect_uri=%s"
-	tokenURL         = "https://discord.com/api/oauth2/token?client_id=%s&client_secret=%s&grant_type=authorization_code&scope=%s&code=%s&redirect_uri=%s"
+	tokenURL         = "https://discord.com/api/oauth2/token"
 )
 
 // TokenResponse contains response from OAuth
